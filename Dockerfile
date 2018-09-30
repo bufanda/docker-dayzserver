@@ -29,6 +29,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 
 RUN \
 		/opt/service/steamcmd/steamcmd \
+		+@sSteamCmdForcePlatformType windows \
 		+login $steamname $steampassword \
 		+force_install_dir /opt/dayzserver \
 		+app_update 223350 validate \
