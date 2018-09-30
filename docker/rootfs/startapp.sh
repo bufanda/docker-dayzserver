@@ -2,6 +2,21 @@
 
 export HOME=/config
 
+#install/update server on startup
+/opt/service/steamcmd/steamcmd \
+		+@sSteamCmdForcePlatformType windows \
+		+login $STEAMNAME $STEAMPASSWORD \
+		+force_install_dir /opt/dayzserver \
+		+app_update 223350 validate \
+		+quit
+
+if [ -d /opt/dayzserver/mpmissions ]
+then
+	mv /opt/dayzserver/mpmissions /opt/dayzserver/mpmissions.template
+	rm /opt/dayzserver/mpmissions
+	ln -s ${HOME}/mpmissions /opt/dayzserver/mpmissions
+fi
+
 if [ ! -d "${HOME}/mpmissions" ]
 then
 	cp -vr /opt/dayzserver/mpmissions.template "${HOME}/mpmissions"
